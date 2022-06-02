@@ -1,0 +1,27 @@
+name: model-train-eval
+on: [push]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v2
+      - name: Setup Python 3
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Setup CML
+      - uses: iterative/setup-cml@v1
+      - name: Train and evaluate model
+        run: |
+          pip install -r requirements.txt
+          python simple_regression.py 100
+          python evaluate.py
+        shell: python
+      - name: Publish results
+        run: |
+          cat lego_reg_results.csv >> report.md
+          cml-publish error_plot.jpg --md >> report.md
+          cml-send-comment report.md
+          cml-send-github-check report.md
+        shell: bash
