@@ -9,14 +9,15 @@ jobs:
       - name: Setup Python 3
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8.10'
+          python-version: '3.x'
       - name: Setup CML
         uses: iterative/setup-cml@v1
       - name: Train and evaluate model
         run: |
-          pip install -r requirements.txt
-          python simple_regression.py 100
-          python evaluate.py
+          pip3 install tensorflow
+          pip3 install matplotlib
+          python3 simple_regression.py 100
+          python3 evaluate.py
         shell: bash
       - name: Publish results
         run: |
