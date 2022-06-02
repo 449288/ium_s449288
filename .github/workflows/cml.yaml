@@ -13,8 +13,6 @@ jobs:
       - name: Setup CML
         uses: iterative/setup-cml@v1
       - name: Train and evaluate model, publish results
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pip3 install tensorflow matplotlib pandas numpy
           python3 simple_regression.py 100
@@ -25,3 +23,5 @@ jobs:
           cml-send-comment report.md
           cml-send-github-check report.md
         shell: bash
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
