@@ -14,8 +14,7 @@ jobs:
         uses: iterative/setup-cml@v1
       - name: Train and evaluate model
         run: |
-          pip3 install tensorflow
-          pip3 install matplotlib
+          pip3 install tensorflow matplotlib pandas numpy
           python3 simple_regression.py 100
           python3 evaluate.py
         shell: bash
