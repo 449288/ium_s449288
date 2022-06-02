@@ -17,7 +17,7 @@ jobs:
           pip install -r requirements.txt
           python simple_regression.py 100
           python evaluate.py
-        shell: python
+        shell: bash
       - name: Publish results
         run: |
           cat lego_reg_results.csv >> report.md
