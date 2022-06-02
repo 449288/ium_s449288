@@ -12,14 +12,14 @@ jobs:
           python-version: '3.x'
       - name: Setup CML
         uses: iterative/setup-cml@v1
-      - name: Train and evaluate model
+      - name: Train and evaluate model, publish results
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pip3 install tensorflow matplotlib pandas numpy
           python3 simple_regression.py 100
           python3 evaluate.py
-        shell: bash
-      - name: Publish results
-        run: |
+          
           cat lego_reg_results.csv >> report.md
           cml-publish error_plot.jpg --md >> report.md
           cml-send-comment report.md
